@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-cached": "1.1.1"
+  },
+  "dependencies": {
+    "angular": "1.6.10"
+  }
+}

@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ImageRetriever.DataAccess;
+using ImageRetriever.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NLog;
 
-namespace ImageRetrieverClient
+namespace ImageRetriever
 {
     public class Startup
     {
@@ -22,6 +21,11 @@ namespace ImageRetrieverClient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var logger = LogManager.GetLogger("*");
+            services.AddSingleton(logger);
+            services.AddSingleton<Logging.ILogger, NLogLogger>();
+            services.AddSingleton<IWebAccess, SystemNetWebAccess>();
+            services.AddSingleton<IImageReader, ImageMagickImageReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
